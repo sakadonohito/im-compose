@@ -28,6 +28,13 @@ include directory */var/lib/mysql*
   - password for IM user
 - volume_from: data-container
 
+#### additional db data 
+
+INTER-Mediator startup sql put to mysql/tmp/
+ex. sample_schema_mysql.sql
+*require file extention ".sql"*
+then docker execute sql
+
 ### PHP5.6.23
 
 - timezone: Asia/Tokyo
@@ -36,3 +43,4 @@ include directory */var/lib/mysql*
 
 - volume: webroot:/var/www/html
   - webroot include INTER-Mediator directory
+

@@ -3,7 +3,7 @@ version: '2'
 
 volumes:
   mysql_data:
-  postgres_data:
+  #postgres_data:
     
 services:
   # mysql
@@ -21,15 +21,15 @@ services:
       MYSQL_PASSWORD: "password"
 
   # PostgreSQL
-  postgres:
-    image: postgres:9.5  
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - "./postgres/tmp:/docker-entrypoint-initdb.d"
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_PASSWORD: "Postgres95!"
+  #postgres:
+  #  image: postgres:9.5  
+  #  volumes:
+  #    - postgres_data:/var/lib/postgresql/data
+  #    - "./postgres/tmp:/docker-entrypoint-initdb.d"
+  #  ports:
+  #    - "5432:5432"
+  #  environment:
+  #    POSTGRES_PASSWORD: "Postgres95!"
 
   # web(php & apache)
   web:
@@ -39,11 +39,11 @@ services:
     image: sakadonohito/php5.6.23-apache
     links:
       - mysqld:mysql_host
-      - postgres:postgres_host
+      #- postgres:postgres_host
     ports:
       - "80:80"
     volumes:
       - "./apache/webroot:/var/www/html"
     environment:
       MYSQL_HOST: mysql_host
-      POSTGRES_HOST: postgres_host
+      #POSTGRES_HOST: postgres_host

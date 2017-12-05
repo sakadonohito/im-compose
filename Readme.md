@@ -58,7 +58,7 @@ docker-compose down -v
 - 設定を追加変更したい場合はconfディレクトリ内の設定を追加変更等行ってください。
 
 #### サンプルデータについて
-*mysql/init*ディレクトリ内に INTER-Mediatorのdist-docs にあるsample_schema_mysql.txtを元にしたsample_schema_mysql.sqlをgitにあえて含めています。
+*mysql/init*ディレクトリ内に INTER-Mediatorのdist-docs にあるsample_schema_mysql.txtを元にしたsample_schema_mysql.sqlをgitにあえて含めています。
 
 必要に応じて内容を変更するか、最新のものに取り替えてください。
 
@@ -69,7 +69,7 @@ docker-compose down -v
 - postgresユーザーのパスワードはdocker-composeで変数で渡しています。[docker参照元](https://hub.docker.com/_/postgres/)
 
 #### サンプルデータについて
-*postgres/init*ディレクトリ内に INTER-Mediatorのdist-docs にあるsample_schema_pgsql.txtを元にしたsample_schema_pgsql.sqlをgitにあえて含めています。
+*postgres/init*ディレクトリ内に INTER-Mediatorのdist-docs にあるsample_schema_pgsql.txtを元にしたsample_schema_pgsql.sqlをgitにあえて含めています。
 
 必要に応じて内容を変更するか、最新のものに取り替えてください。
 
@@ -85,9 +85,9 @@ docker-compose down -v
 #### 補足
 INTER-Mediatorディレクトリをwebのrootとしてマウントしています。
 
-pdo_mysqlなど拡張の追加が必要だったため、officialのイメージそのままではなく、追加処理をしたイメージを使用しています。
+pdo_mysqlなど拡張の追加が必要だったため、officialのイメージそのままではなく、追加処理をしたイメージを使用しています。
 ※リポジトリに含まれているDockerfileでビルドしたイメージを使っています。
 
 docker-composeで作成したコンテナがネットワーク上の名前を解決する仕組みをつかているため、params.phpの編集が必須になります。
 
-MySQLやPostgreSQLへの接続(DSN)でのhostの指定は、コンテナの名前を指定すれば通信できます。そのようにparams.phpもしくは、接続設定を書くファイルを編集してください。
+MySQLやPostgreSQLへの接続(DSN)でのhostの指定は、コンテナの名前を指定すれば通信できます。そのようにparams.phpもしくは、接続設定を書くファイルを編集してください。

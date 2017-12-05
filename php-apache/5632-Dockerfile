@@ -1,0 +1,11 @@
+FROM php:5.6.32-apache-jessie
+
+MAINTAINER sakadonohitio
+
+RUN set -ex apk --no-cache add postgresql-dev libpq-dev
+RUN apt-get update && apt-get install -y libpq-dev && \
+    docker-php-ext-install pdo pdo_mysql mysqli pdo_pgsql mbstring
+
+ADD conf/general.ini /usr/local/etc/php/conf.d/general.ini
+ADD conf/mbstring.ini /usr/local/etc/php/conf.d/mbstring.ini
+ADD conf/timezone.ini /usr/local/etc/php/conf.d/timezone.ini

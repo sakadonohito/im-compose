@@ -1,49 +1,60 @@
 ---
+# ハイフンやコロンが含まれる文字列の場合はダブルクォーテーションで囲んでいます
 version: '2'
 
 volumes:
   mysql_data:
-  #postgres_data:
-    
+  postgres_data:
+
 services:
   # mysql
-  mysqld:
-    image: sakadonohito/mysql5.6
+  mysql:
+    container_name: mydb
+    image: "mysql:5.7"
     volumes:
-      - mysql_data:/var/lib/mysql
-      - "./mysql/tmp:/docker-entrypoint-initdb.d"
+      - "mysql_data:/var/lib/mysql"
+      - "./mysql/conf:/etc/mysql/conf.d"
+      - "./mysql/init:/docker-entrypoint-initdb.d"
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: "r00tPass"
-      MYSQL_DATABASE: "test_db"
-      MYSQL_USER: "web"
-      MYSQL_PASSWORD: "password"
-
+      MYSQL_ROOT_PASSWORD: "change_password"
+      # MYSQL_DATABASE: "test_db" #サンプル作成SQL内で作成されるので不要
+    networks:
+      - im_net
+      
   # PostgreSQL
-  #postgres:
-  #  image: postgres:9.5  
-  #  volumes:
-  #    - postgres_data:/var/lib/postgresql/data
-  #    - "./postgres/tmp:/docker-entrypoint-initdb.d"
-  #  ports:
-  #    - "5432:5432"
-  #  environment:
-  #    POSTGRES_PASSWORD: "Postgres95!"
-
+  postgres:
+    container_name: pgdb
+    image: "postgres:9.6.6-alpine"
+    volumes:
+      - "postgres_data:/var/lib/postgresql/data"
+      - "./postgres/init:/docker-entrypoint-initdb.d"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: "change_password"
+    networks:
+      - im_net
+      
   # web(php & apache)
   web:
     depends_on:
-      - mysqld
-      #- postgres
-    image: sakadonohito/php5.6.23-apache
-    links:
-      - mysqld:mysql_host
-      #- postgres:postgres_host
+      - mysql
+      - postgres
+    container_name: web
+    image: "sakadonohito/php71-apache:1.0"
     ports:
-      - "80:80"
+      - "10080:80"
     volumes:
-      - "./apache/webroot:/var/www/html"
+      - "./php-apache/html/INTER-Mediator:/var/www/html" #INTER-MediatorディレクトリをWebのrootにしています
     environment:
-      MYSQL_HOST: mysql_host
-      #POSTGRES_HOST: postgres_host
+      MYSQL_HOST: mydb
+      POSTGRES_HOST: pgdb
+    networks:
+      - im_net
+
+#NetWork Setting
+networks: 
+  im_net: 
+

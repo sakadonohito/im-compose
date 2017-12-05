@@ -10,12 +10,13 @@ Includes
 - Apache/php7.1.12
 
 ## 準備
-1. ```php-apach/html/```に移動し ```git clone https://github.com/sakadonohito/im-compose.git```
+1. ```git clone https://github.com/sakadonohito/im-compose.git```
 2. **docker-compose.yml**内のDBのrootユーザーのパスワードを変更する
-3. 必要に応じてサンプルデータを変更する
+3. ```php-apach/html/```に移動し ```git clone https://github.com/INTER-Mediator/INTER-Mediator.git```
+4. 必要に応じてサンプルデータを変更する
     - ```mysql/init/sample_schema_mysql.sql```
     - ```postgres/init/sample_schema_pgsql.sql```
-4. INTER-Mediatorの**params.php**を以下のように変更する
+5. INTER-Mediatorの**params.php**を以下のように変更する
 
 ```php
 //以下3行を追加 ※PostgreSQLを使わないならMySQLの分だけで良い

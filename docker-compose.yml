@@ -43,14 +43,16 @@ services:
       - mysql
       - postgres
     container_name: web
+    build:
+        context: ./php-apache
     image: "sakadonohito/php71-apache:1.0"
     ports:
       - "10080:80"
     volumes:
-      - "./php-apache/html/INTER-Mediator:/var/www/html" #INTER-MediatorディレクトリをWebのrootにしています
+      - "./php-apache/html:/var/www/html" #INTER-Mediatorディレクトリの1つ上位のディレクトリをWebのrootにしています
     environment:
       MYSQL_HOST: mydb
-      POSTGRES_HOST: pgdb
+#      POSTGRES_HOST: pgdb
     networks:
       - im_net
 

@@ -1,0 +1,19 @@
+FROM php:8.0.1-apache-buster
+
+MAINTAINER sakadonohitio
+
+RUN apt-get update
+RUN apt-get install -y libpq-dev
+RUN docker-php-ext-install pdo_mysql mysqli pdo_pgsql
+RUN apt-get install -y libldap-common libldap-dev
+RUN docker-php-ext-install ldap
+RUN apt-get install -y libonig-dev
+RUN docker-php-ext-install bcmath
+RUN apt-get install -y libzzip-dev zlib1g-dev libpng-dev libicu-dev
+RUN docker-php-ext-install gd
+RUN docker-php-ext-install intl
+RUN docker-php-ext-install exif
+
+ADD conf/general.ini /usr/local/etc/php/conf.d/general.ini
+ADD conf/mbstring.ini /usr/local/etc/php/conf.d/mbstring.ini
+ADD conf/timezone.ini /usr/local/etc/php/conf.d/timezone.ini

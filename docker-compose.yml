@@ -52,7 +52,7 @@ services:
       - "./php-apache/html:/var/www/html" #INTER-Mediatorディレクトリの1つ上位のディレクトリをWebのrootにしています
     environment:
       MYSQL_HOST: mydb
-#      POSTGRES_HOST: pgdb
+      POSTGRES_HOST: pgdb
     networks:
       - im_net
 

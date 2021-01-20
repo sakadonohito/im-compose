@@ -4,7 +4,7 @@ version: '2'
 
 volumes:
   mysql_data:
-#  postgres_data:
+  postgres_data:
 
 services:
   # mysql
@@ -25,7 +25,7 @@ services:
       
   # PostgreSQL
   postgres:
-   container_name: pgdb
+    container_name: pgdb
     image: "postgres:9.6.6-alpine"
     volumes:
       - "postgres_data:/var/lib/postgresql/data"
